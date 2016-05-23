@@ -144,7 +144,7 @@ void DOWN() {
 
   if (OUT_DOWNState == HIGH) {
     Serial.println(F("PRESSR"));
-    bleKeyboard.press(KEYCODE_R);
+    bleKeyboard.press(0x36,KEYCODE_MOD_LEFT_SHIFT);
     bleKeyboard.releaseAll();
     ButtonDOWNState = LOW;
   }
@@ -180,7 +180,7 @@ void UP() {
 
   if (OUT_UPState == HIGH) {
     Serial.println(F("PRESSO"));
-    bleKeyboard.press(KEYCODE_O);
+    bleKeyboard.press(0x37,KEYCODE_MOD_LEFT_SHIFT);
     bleKeyboard.releaseAll();
     ButtonUPState = LOW;
   }
@@ -216,10 +216,8 @@ void PHOTOS() {
 
   if (OUT_PHOTOSState == HIGH) {
     Serial.println(F("PRESSS"));
-    bleKeyboard.press(KEYCODE_MOD_LEFT_CONTROL);
-    delay(10);
-    bleKeyboard.press(KEYCODE_Q);
-    delay(10);
+    bleKeyboard.press(KEYCODE_Q,KEYCODE_MOD_LEFT_CONTROL);
+    bleKeyboard.press(KEYCODE_Q,KEYCODE_MOD_RIGHT_CONTROL);
     bleKeyboard.releaseAll();
     ButtonPHOTOSState = LOW;
   }
@@ -255,10 +253,7 @@ void CONTACTS() {
 
   if (OUT_CONTACTSState == HIGH) {
     Serial.println(F("PRESST"));
-    bleKeyboard.press(KEYCODE_MOD_LEFT_CONTROL);
-    delay(10);
-    bleKeyboard.press(KEYCODE_B);
-    delay(10);
+    bleKeyboard.press(KEYCODE_Q);
     bleKeyboard.releaseAll();
     ButtonCONTACTSState = LOW;
   }
