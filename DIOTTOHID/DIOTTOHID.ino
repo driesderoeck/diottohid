@@ -8,11 +8,13 @@
 #define BLE_RDY   2
 #define BLE_RST   3
 
-const int BUTTONDOWN = 9; // key >
-const int BUTTONUP = 8; // key <
-const int BUTTONCONTACTS = 7; // key ctrl b
-const int BUTTONPHOTOS = 6; // key ctrl q
-const int BUTTONCOMMENT = 5; // key ctrl shift u
+const int BUTTONDOWN = 8; // key > 
+const int BUTTONUP = 9; // key <
+const int BUTTONCONTACTS = 7; // key c
+const int BUTTONPHOTOS = 6; // key g
+const int BUTTONCOMMENT = 5; // key m
+
+//c (contacts), g (gallery), < (up), > (down), l (logout), f (fullscreen).
 
 // We're using this BLEPeripheral with an Android device
 #define ANDROID_CENTRAL
@@ -52,8 +54,8 @@ void setup() {
 //  while (!Serial);
 // #endif
 
-  // clears bond data on every boot
-  bleHID.clearBondStoreData();
+// clears bond data on every boot
+//  bleHID.clearBondStoreData();
 
 #ifdef ANDROID_CENTRAL
   bleHID.setReportIdOffset(1);
@@ -61,7 +63,7 @@ void setup() {
 
   bleHID.setDeviceName("DIOTTO");
 
-  bleHID.setLocalName("DIOTTOHID");
+  bleHID.setLocalName("DIOTTOHIDIRIS");
 
   bleHID.addHID(bleKeyboard);
   bleHID.begin();
@@ -107,9 +109,6 @@ void loop() {
       COMMENT();
 
     } // close while loop
-
-
-
 
     // central disconnected
     Serial.print(F("Disconnected from central: "));
@@ -216,8 +215,7 @@ void PHOTOS() {
 
   if (OUT_PHOTOSState == HIGH) {
     Serial.println(F("PRESSS"));
-    bleKeyboard.press(KEYCODE_Q,KEYCODE_MOD_LEFT_CONTROL);
-    bleKeyboard.press(KEYCODE_Q,KEYCODE_MOD_RIGHT_CONTROL);
+    bleKeyboard.press(KEYCODE_G);
     bleKeyboard.releaseAll();
     ButtonPHOTOSState = LOW;
   }
@@ -253,7 +251,7 @@ void CONTACTS() {
 
   if (OUT_CONTACTSState == HIGH) {
     Serial.println(F("PRESST"));
-    bleKeyboard.press(KEYCODE_Q);
+    bleKeyboard.press(KEYCODE_C);
     bleKeyboard.releaseAll();
     ButtonCONTACTSState = LOW;
   }
@@ -289,7 +287,7 @@ void COMMENT() {
 
   if (OUT_COMMENTState == HIGH) {
     Serial.println(F("PRESSI"));
-    bleKeyboard.press(KEYCODE_I);
+    bleKeyboard.press(KEYCODE_M);
     bleKeyboard.releaseAll();
     ButtonCOMMENTState = LOW;
   }
